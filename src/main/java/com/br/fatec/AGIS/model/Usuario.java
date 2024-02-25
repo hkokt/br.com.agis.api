@@ -33,6 +33,6 @@ public class Usuario {
 	@Column(nullable = false, length = 20)
 	private String situacao;
 	
-	@Column(nullable = false, unique = true, length = 30)
+	@Column(nullable = false, length = 30)
 	private String senha;
 }

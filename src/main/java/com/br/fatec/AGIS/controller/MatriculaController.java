@@ -19,7 +19,7 @@ import com.br.fatec.AGIS.service.MatriculaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/matricula")
+@RequestMapping("/matriculas")
 public class MatriculaController {
 	@Autowired
 	private MatriculaService matriculaService;

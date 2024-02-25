@@ -12,7 +12,7 @@ CREATE TABLE Disciplina (
     nome VARCHAR(100) NOT NULL,
     qtd_aulas INT NOT NULL,
     semestre INT NOT NULL,
-    cod_curso BIGINT NOT NULL,
+    cod_curso BIGSERIAL NOT NULL,
     CONSTRAINT fk_curso FOREIGN KEY (cod_curso) REFERENCES Curso(cod)
 );
 
@@ -20,24 +20,25 @@ CREATE TABLE Grade_Curricular (
     cod BIGSERIAL PRIMARY KEY NOT NULL,
     ano INT NOT NULL,
     semestre INT NOT NULL,
-    cod_curso BIGINT NOT NULL,
+    cod_curso BIGSERIAL NOT NULL,
     CONSTRAINT fk_curso_gc FOREIGN KEY (cod_curso) REFERENCES Curso(cod)
 );
 
 CREATE TABLE Usuario (
     cpf VARCHAR(11) PRIMARY KEY NOT NULL,
     data_nasc DATE NOT NULL,
-    email_corp VARCHAR(30) NOT NULL,
-    email_pessoal VARCHAR(30) NOT NULL,
+    email_corp  VARCHAR(30) NOT NULL,
+    email_pessoal  VARCHAR(30) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     situacao VARCHAR(20) NOT NULL,
-    senha VARCHAR(30) NOT NULL
+    senha VARCHAR(30) NOT NULL,
+    UNIQUE(cpf, email_corp, email_pessoal)
 );
 
 CREATE TABLE Professor (
     cod BIGSERIAL PRIMARY KEY NOT NULL,
     titulacao VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) NOT NULL,
+    cpf VARCHAR(11)  NOT NULL,
     CONSTRAINT fk_usuario_professor FOREIGN KEY (cpf) REFERENCES Usuario(cpf)
 );
 
@@ -48,10 +49,10 @@ CREATE TABLE Aluno (
     data_matricula DATE NOT NULL,
     inst_conc_2grau VARCHAR(100) NOT NULL,
     nome_social VARCHAR(100) NOT NULL,
-    pos_vestibular INT NOT NULL,
-    pt_vestibular INT NOT NULL,
-    cod_curso BIGINT NOT NULL,
-    cpf VARCHAR(11) NOT NULL,
+    posicao_vestibular INT NOT NULL,
+    pontuacao_vestibular INT NOT NULL,
+    cod_curso BIGSERIAL NOT NULL,
+    cpf VARCHAR(11)  NOT NULL,
     CONSTRAINT fk_curso_aluno FOREIGN KEY (cod_curso) REFERENCES Curso(cod),
     CONSTRAINT fk_usuario_aluno FOREIGN KEY (cpf) REFERENCES Usuario(cpf)
 );
@@ -64,7 +65,7 @@ CREATE TABLE Turma (
     situacao VARCHAR(20) NOT NULL,
     cod_disciplina BIGINT NOT NULL,
     cod_grade BIGINT NOT NULL,
-    cod_professor BIGINT NOT NULL,
+    cod_professor BIGSERIAL NOT NULL,
     CONSTRAINT fk_disciplina_turma FOREIGN KEY (cod_disciplina) REFERENCES Disciplina(cod),
     CONSTRAINT fk_professor_turma FOREIGN KEY (cod_professor) REFERENCES Professor(cod),
     CONSTRAINT fk_grade_turma FOREIGN KEY (cod_grade) REFERENCES Grade_Curricular(cod)
@@ -76,7 +77,8 @@ CREATE TABLE Matricula (
     nota_final NUMERIC(3, 2) NOT NULL,
     situacao VARCHAR(20) NOT NULL,
     aluno_ra VARCHAR(15) NOT NULL,
-    cod_turma BIGINT NOT NULL,
+    cod_turma BIGSERIAL NOT NULL,
+    PRIMARY KEY (ano, semestre, aluno_ra, cod_turma),
     CONSTRAINT fk_aluno_matricula FOREIGN KEY (aluno_ra) REFERENCES Aluno(ra),
     CONSTRAINT fk_turma_matricula FOREIGN KEY (cod_turma) REFERENCES Turma(cod)
 );
@@ -85,7 +87,7 @@ CREATE TABLE Chamada (
     data_chamada DATE NOT NULL,
     qtd_faltas INT NOT NULL,
     aluno_ra VARCHAR(15) NOT NULL,
-    cod_turma BIGINT NOT NULL,
+    cod_turma BIGSERIAL NOT NULL,
     PRIMARY KEY (data_chamada, aluno_ra, cod_turma),
     CONSTRAINT fk_aluno_chamada FOREIGN KEY (aluno_ra) REFERENCES Aluno(ra),
     CONSTRAINT fk_turma_chamada FOREIGN KEY (cod_turma) REFERENCES Turma(cod)
