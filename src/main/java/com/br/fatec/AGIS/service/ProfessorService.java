@@ -37,9 +37,7 @@ public class ProfessorService {
 		user.setNome(professorDto.nome());
 		user.setDataNasc(professorDto.dataNasc());
 		user.setEmailPessoal(professorDto.emailPessoal());
-		
 		user.setEmailCorp(geraEmailCorp(professorDto.nome()));
-		
 		user.setSituacao("ativo");
 		user.setSenha("123456");
 		
@@ -78,6 +76,11 @@ public class ProfessorService {
 		professorRepository.delete(professorModel);
 
 		return professorModel;
+	}
+	
+	// LOGIN
+	public Professor login(String cpf) {
+		return professorRepository.loginProf(cpf);
 	}
 	
 	private String geraEmailCorp(String nome) {
