@@ -19,7 +19,7 @@ import com.br.fatec.AGIS.service.GradeCurricularService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/gradeCurricular")
+@RequestMapping("/grades")
 public class GradeCurricularController {
 	@Autowired
 	private GradeCurricularService gradeCurricularService;

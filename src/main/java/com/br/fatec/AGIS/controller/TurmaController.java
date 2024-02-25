@@ -21,7 +21,7 @@ import com.br.fatec.AGIS.service.TurmaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/turma")
+@RequestMapping("/turmas")
 public class TurmaController {
 	@Autowired
 	private TurmaService turmaService;

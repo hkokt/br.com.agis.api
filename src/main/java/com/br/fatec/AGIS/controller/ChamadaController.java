@@ -20,7 +20,7 @@ import com.br.fatec.AGIS.service.ChamadaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/chamada")
+@RequestMapping("/chamadas")
 public class ChamadaController {
 	@Autowired
 	private ChamadaService chamadaService;

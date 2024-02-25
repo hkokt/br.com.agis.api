@@ -21,7 +21,7 @@ import com.br.fatec.AGIS.service.AlunoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/alunos")
 public class AlunoController {
 	@Autowired
 	private AlunoService alunoService;

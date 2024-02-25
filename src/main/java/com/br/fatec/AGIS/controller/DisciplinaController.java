@@ -21,7 +21,7 @@ import com.br.fatec.AGIS.service.DisciplinaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/disciplina")
+@RequestMapping("/disciplinas")
 public class DisciplinaController {
 	@Autowired
 	private DisciplinaService disciplinaService;

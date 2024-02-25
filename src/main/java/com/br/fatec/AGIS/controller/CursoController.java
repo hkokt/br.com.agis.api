@@ -21,7 +21,7 @@ import com.br.fatec.AGIS.service.CursoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/curso")
+@RequestMapping("/cursos")
 public class CursoController {
 	@Autowired
 	private CursoService cursoService;

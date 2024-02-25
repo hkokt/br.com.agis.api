@@ -30,7 +30,7 @@ public class MatriculaController {
 	}
 	
 	@GetMapping("/turma/{cod}")
-	public ResponseEntity<List<Matricula>> getAllByRa(@PathVariable("cod") Long codTurma) {
+	public ResponseEntity<List<Matricula>> getAllByCodTurna(@PathVariable("cod") Long codTurma) {
 		return ResponseEntity.status(HttpStatus.OK).body(matriculaService.selectAllByCodTurma(codTurma));
 	}
 	
