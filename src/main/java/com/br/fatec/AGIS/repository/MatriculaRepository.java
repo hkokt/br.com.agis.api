@@ -13,7 +13,7 @@ import com.br.fatec.AGIS.model.pk.MatriculaPk;
 @Repository
 public interface MatriculaRepository extends JpaRepository<Matricula, MatriculaPk> {
 	
-	@Query(value = "select * from Matricula where cod_turma = ?", nativeQuery = true)
+	@Query(value = "select * from Matricula where cod_turma = ? and situacao = 'cursando'", nativeQuery = true)
 	List<Matricula> selectAllByCodTurma(@Param("cod") Long codTurma);
 	
 	@Query(value = "select * from Matricula where aluno_ra = ?", nativeQuery = true)

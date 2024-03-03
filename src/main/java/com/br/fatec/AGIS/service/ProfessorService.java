@@ -20,6 +20,11 @@ public class ProfessorService {
 		return professorRepository.findAll();
 	}
 	
+	// LOGIN
+	public Professor login(String cpf) {
+		return professorRepository.loginProf(cpf);
+	}
+	
 	public Professor selectById(Long id) throws Exception {
 		Optional<Professor> professor = professorRepository.findById(id);
 		if (professor.isEmpty()) {
@@ -76,11 +81,6 @@ public class ProfessorService {
 		professorRepository.delete(professorModel);
 
 		return professorModel;
-	}
-	
-	// LOGIN
-	public Professor login(String cpf) {
-		return professorRepository.loginProf(cpf);
 	}
 	
 	private String geraEmailCorp(String nome) {

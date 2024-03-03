@@ -32,10 +32,10 @@ public class DataController {
 		return ResponseEntity.status(HttpStatus.OK).body(dataService.selectAll());
 	}
 
-	@GetMapping("/{data}")
-	public ResponseEntity<Object> getId(@PathVariable("data") LocalDate data) {
+	@GetMapping("/{desc}")
+	public ResponseEntity<Object> getId(@PathVariable("desc") String desc) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(dataService.selectById(data));
+			return ResponseEntity.status(HttpStatus.OK).body(dataService.selectById(desc));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}

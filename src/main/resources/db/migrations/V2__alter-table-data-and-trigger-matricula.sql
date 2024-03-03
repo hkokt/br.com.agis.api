@@ -26,7 +26,8 @@ BEGIN
         INNER JOIN grade_curricular gc ON gc.cod_curso = c.cod
         INNER JOIN turma t ON t.cod_disciplina = d.cod
     WHERE
-        d.semestre = 1 
+        d.semestre = 1 	
+        AND gc.cod_curso = NEW.cod_curso
         AND gc.ano = EXTRACT(YEAR FROM CURRENT_DATE)
         AND gc.semestre = sem;
         

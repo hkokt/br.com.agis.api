@@ -21,8 +21,8 @@ public class DataService {
 		return dataRepository.findAll();
 	}
 	
-	public Data selectById(LocalDate dia) throws Exception {
-		Optional<Data> data = dataRepository.findById(dia);
+	public Data selectById(String desc) throws Exception {
+		Optional<Data> data = dataRepository.findByDesc(desc);
 		if (data.isEmpty()) {
 			throw new Exception("Data não registrado");
 		}

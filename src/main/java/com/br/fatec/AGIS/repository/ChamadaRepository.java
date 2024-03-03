@@ -14,7 +14,6 @@ import com.br.fatec.AGIS.model.pk.ChamadaPk;
 @Repository
 public interface ChamadaRepository extends JpaRepository<Chamada, ChamadaPk> {
 	
-	@Query(value = "select * from Chamada where dataChamada = ? and cod_turma = ?", nativeQuery = true)
-	List<Chamada> selectAllByData(@Param("data") LocalDate data, @Param("cod") Long codTurma);
-	
+	@Query(value = "select * from Chamada where cod_turma = ? and data_chamada = ?", nativeQuery = true)
+	List<Chamada> selectAllByDataAndCodTurma(@Param("cod") Long codTurma, @Param("data") LocalDate data);
 }

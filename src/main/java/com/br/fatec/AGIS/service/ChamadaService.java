@@ -26,8 +26,8 @@ public class ChamadaService {
 	@Autowired
 	private TurmaRepository turmaRepository;
 	
-	public List<Chamada> selectAllByData(LocalDate data, Long codTurma) {
-		return chamadaRepository.selectAllByData(data, codTurma);
+	public List<Chamada> selectAllByDataAndCodTurma(Long codTurma, String data) {
+		return chamadaRepository.selectAllByDataAndCodTurma(codTurma, LocalDate.parse(data));
 	}
 	
 	public Chamada insert(ChamadaDto chamadaDto) {

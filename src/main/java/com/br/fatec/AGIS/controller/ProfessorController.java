@@ -49,7 +49,6 @@ public class ProfessorController {
 	// LOGIN
 	@PostMapping("/login")
 	public ResponseEntity<Professor> login(@RequestBody LoginDto loginDto) {
-		System.out.println(loginDto.toString());
 		return ResponseEntity.status(HttpStatus.OK).body(professorService.login(loginDto.cpf()));
 	}
 

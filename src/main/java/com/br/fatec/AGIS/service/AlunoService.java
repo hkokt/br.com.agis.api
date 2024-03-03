@@ -47,7 +47,7 @@ public class AlunoService {
 		user.setEmailPessoal(alunoDto.emailPessoal());
 		user.setEmailCorp(geraEmailCorp(alunoDto.nome().trim()));
 		user.setSituacao("ativo");
-		user.setSenha(geraSenha());
+		user.setSenha("123456");
 		alunoModel.setUsuario(user);
 		
 		alunoModel.setNomeSocial(alunoDto.nomeSocial());
@@ -103,17 +103,6 @@ public class AlunoService {
 		}
 		
 		return ra;
-	}
-	
-	private String geraSenha() {
-		String senha = "";
-		
-		for (int i = 0; i < 4; i++) {
-			int num = (int) (Math.random() * 10) + 1;
-			senha += num;
-		}
-		
-		return senha;
 	}
 	
 	private String geraEmailCorp(String nome) {

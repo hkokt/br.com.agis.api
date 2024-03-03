@@ -1,16 +1,13 @@
 package com.br.fatec.AGIS.controller;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.fatec.AGIS.dto.ChamadaDto;
@@ -25,9 +22,13 @@ public class ChamadaController {
 	@Autowired
 	private ChamadaService chamadaService;
 	
-	@GetMapping("/datas")
-	public ResponseEntity<List<Chamada>> getAllByData(@RequestParam("data") LocalDate data, @RequestParam("codTurma") Long codTurma) {
-		return ResponseEntity.status(HttpStatus.OK).body(chamadaService.selectAllByData(data, codTurma));
+	@GetMapping("/{cod}/{data}")
+	public ResponseEntity<Boolean> getAllByDataAndCodTurma(@PathVariable("cod") Long codTurma, @PathVariable("data") String data) {
+		if (chamadaService.selectAllByDataAndCodTurma(codTurma, data).isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(Boolean.TRUE);
+		} else {
+			return ResponseEntity.status(HttpStatus.OK).body(Boolean.FALSE);
+		}
 	}
 	
 	@PostMapping

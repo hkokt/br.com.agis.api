@@ -16,12 +16,14 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @lombok.Data
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 @IdClass(ChamadaPk.class)
+@NoArgsConstructor
 public class Chamada {
 	@Id
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Aluno.class, fetch = FetchType.LAZY)
