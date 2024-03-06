@@ -1,5 +1,7 @@
 package com.br.fatec.AGIS.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,12 @@ public class ChamadaController {
 	private ChamadaService chamadaService;
 	
 	@GetMapping("/{cod}/{data}")
-	public ResponseEntity<Boolean> getAllByDataAndCodTurma(@PathVariable("cod") Long codTurma, @PathVariable("data") String data) {
+	public ResponseEntity<List<Chamada>> getAllByDataAndCodTurma(@PathVariable("cod") Long codTurma, @PathVariable("data") String data) {
+		return ResponseEntity.status(HttpStatus.OK).body(chamadaService.selectAllByDataAndCodTurma(codTurma, data));
+	}
+	
+	@GetMapping("/verificacao/{cod}/{data}")
+	public ResponseEntity<Boolean> getAllByDataAndCodTurmaVerficacao(@PathVariable("cod") Long codTurma, @PathVariable("data") String data) {
 		if (chamadaService.selectAllByDataAndCodTurma(codTurma, data).isEmpty()) {
 			return ResponseEntity.status(HttpStatus.OK).body(Boolean.TRUE);
 		} else {

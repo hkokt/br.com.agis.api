@@ -1,9 +1,11 @@
 package com.br.fatec.AGIS.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.br.fatec.AGIS.dto.ChamadaDto;
 import com.br.fatec.AGIS.model.pk.ChamadaPk;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,22 +18,26 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@lombok.Data
+@Data
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 @IdClass(ChamadaPk.class)
 @NoArgsConstructor
-public class Chamada {
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
+public class Chamada implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Aluno.class, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Aluno.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "aluno_ra")
 	private Aluno aluno;
 	
 	@Id
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Turma.class, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Turma.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "cod_turma")
 	private Turma turma;
 	
@@ -48,6 +54,5 @@ public class Chamada {
 		this.dataChamada = chamadaDto.data();
 		this.qtdFaltas = chamadaDto. qtdFaltas();
 	}
-	
 	
 }
