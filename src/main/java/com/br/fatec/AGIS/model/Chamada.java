@@ -1,11 +1,9 @@
 package com.br.fatec.AGIS.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.br.fatec.AGIS.dto.ChamadaDto;
 import com.br.fatec.AGIS.model.pk.ChamadaPk;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,10 +25,7 @@ import lombok.NoArgsConstructor;
 @Inheritance(strategy = InheritanceType.JOINED)
 @IdClass(ChamadaPk.class)
 @NoArgsConstructor
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
-public class Chamada implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class Chamada {
 	@Id
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Aluno.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "aluno_ra")

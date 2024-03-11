@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.br.fatec.AGIS.dto.ProfessorDto;
 import com.br.fatec.AGIS.model.Professor;
-import com.br.fatec.AGIS.model.Usuario;
 import com.br.fatec.AGIS.repository.ProfessorRepository;
 
 @Service
@@ -36,18 +35,16 @@ public class ProfessorService {
 	
 	public Professor insert(ProfessorDto professorDto) {
 		var professorModel = new Professor();
-		Usuario user = new Usuario();
 		
-		user.setCpf(professorDto.cpf());
-		user.setNome(professorDto.nome());
-		user.setDataNasc(professorDto.dataNasc());
-		user.setEmailPessoal(professorDto.emailPessoal());
-		user.setEmailCorp(geraEmailCorp(professorDto.nome()));
-		user.setSituacao("ativo");
-		user.setSenha("123456");
+		professorModel.setCpf(professorDto.cpf());
+		professorModel.setNome(professorDto.nome());
+		professorModel.setDataNasc(professorDto.dataNasc());
+		professorModel.setEmailPessoal(professorDto.emailPessoal());
+		professorModel.setEmailCorp(geraEmailCorp(professorDto.nome()));
+		professorModel.setSituacao("ativo");
+		professorModel.setSenha("123456");
 		
 		professorModel.setTitulacao(professorDto.titulacao());
-		professorModel.setUsuario(user);
 		
 		return professorRepository.save(professorModel);
 	}
@@ -61,10 +58,10 @@ public class ProfessorService {
 			throw new Exception("Professor não registrado");
 		}
 		
-		professorModel.getUsuario().setCpf(professorDto.cpf());
-		professorModel.getUsuario().setNome(professorDto.nome());
-		professorModel.getUsuario().setDataNasc(professorDto.dataNasc());
-		professorModel.getUsuario().setEmailPessoal(professorDto.emailPessoal());
+		professorModel.setCpf(professorDto.cpf());
+		professorModel.setNome(professorDto.nome());
+		professorModel.setDataNasc(professorDto.dataNasc());
+		professorModel.setEmailPessoal(professorDto.emailPessoal());
 		professorModel.setTitulacao(professorDto.titulacao());
 		
 		return professorRepository.save(professorModel);

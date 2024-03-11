@@ -46,13 +46,29 @@ public class Aluno {
 	@Column(nullable = false, name = "data_limite_matricula", columnDefinition = "DATE")
 	private LocalDate dataLimiteMatricula;
 	
+	@Column(nullable = false, unique = true, length = 11)
+	private String cpf;
+	
+	@Column(nullable = false, length = 100)
+	private String nome;
+	
+	@Column(nullable = false, name = "data_nasc", columnDefinition = "DATE")
+	private LocalDate dataNasc;
+	
+	@Column(nullable = false, unique = true, name = "email_pessoal", length = 30)
+	private String emailPessoal;
+	
+	@Column(nullable = false, unique = true, name = "email_corp", length = 30)
+	private String emailCorp;	
+	
+	@Column(nullable = false, length = 20)
+	private String situacao;
+	
+	@Column(nullable = false, length = 30)
+	private String senha;
+	
 	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Curso.class, fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false, name = "cod_curso")
 	private Curso curso;
-	
-	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = Usuario.class, fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false, name = "cpf", unique = true)
-	private Usuario usuario;
 }

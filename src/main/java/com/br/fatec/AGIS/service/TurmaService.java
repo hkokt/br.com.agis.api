@@ -16,6 +16,8 @@ import com.br.fatec.AGIS.repository.GradeCurricularRepository;
 import com.br.fatec.AGIS.repository.ProfessorRepository;
 import com.br.fatec.AGIS.repository.TurmaRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TurmaService {
 	@Autowired
@@ -84,6 +86,16 @@ public class TurmaService {
 		turmaModel.setGradeCurricular(null);
 		turmaRepository.delete(turmaModel);
 
+		return turmaModel;
+	}
+
+	public Turma insertMetodoAvalitivo(Long id, String metodo) {
+		Optional<Turma> turma = turmaRepository.findById(id);
+		var turmaModel = turma.get();
+		
+		turmaModel.setMetodoAvaliativo(metodo);
+		turmaRepository.save(turmaModel);
+		
 		return turmaModel;
 	}
 }

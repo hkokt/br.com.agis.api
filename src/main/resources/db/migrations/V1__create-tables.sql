@@ -24,22 +24,17 @@ CREATE TABLE Grade_Curricular (
     CONSTRAINT fk_curso_gc FOREIGN KEY (cod_curso) REFERENCES Curso(cod)
 );
 
-CREATE TABLE Usuario (
-    cpf VARCHAR(11) PRIMARY KEY NOT NULL,
+CREATE TABLE Professor (
+	cod SERIAL PRIMARY KEY,
+    titulacao VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) NOT NULL,
     data_nasc DATE NOT NULL,
     email_corp  VARCHAR(30) NOT NULL,
     email_pessoal  VARCHAR(30) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     situacao VARCHAR(20) NOT NULL,
     senha VARCHAR(30) NOT NULL,
-    UNIQUE(cpf, email_corp, email_pessoal)
-);
-
-CREATE TABLE Professor (
-    cod SERIAL PRIMARY KEY,
-    titulacao VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) NOT NULL,
-    CONSTRAINT fk_usuario_professor FOREIGN KEY (cpf) REFERENCES Usuario(cpf)
+    UNIQUE(email_corp, email_pessoal)
 );
 
 CREATE TABLE Aluno (
@@ -53,8 +48,14 @@ CREATE TABLE Aluno (
     pontuacao_vestibular INT NOT NULL,
     cod_curso INT NOT NULL,
     cpf VARCHAR(11) NOT NULL,
+    data_nasc DATE NOT NULL,
+    email_corp  VARCHAR(30) NOT NULL,
+    email_pessoal  VARCHAR(30) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    situacao VARCHAR(20) NOT NULL,
+    senha VARCHAR(30) NOT NULL,
     CONSTRAINT fk_curso_aluno FOREIGN KEY (cod_curso) REFERENCES Curso(cod),
-    CONSTRAINT fk_usuario_aluno FOREIGN KEY (cpf) REFERENCES Usuario(cpf)
+    UNIQUE(cpf, email_corp, email_pessoal)
 );
 
 CREATE TABLE Turma (

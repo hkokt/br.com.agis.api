@@ -1,5 +1,7 @@
 package com.br.fatec.AGIS.model;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -21,15 +23,31 @@ import jakarta.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Professor{
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long cod;
 	
-	@Column(nullable = false, length = 100)
-	private String titulacao;
+	@Column(nullable = false, length = 11)
+	private String cpf;
 	
-	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = Usuario.class, fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false, name = "cpf", unique = true)
-	private Usuario usuario;
+	@Column(nullable = false, length = 100)
+	private String titulacao;	
+	
+	@Column(nullable = false, length = 100)
+	private String nome;
+	
+	@Column(nullable = false, name = "data_nasc", columnDefinition = "DATE")
+	private LocalDate dataNasc;
+	
+	@Column(nullable = false, unique = true, name = "email_pessoal", length = 30)
+	private String emailPessoal;
+	
+	@Column(nullable = false, unique = true, name = "email_corp", length = 30)
+	private String emailCorp;	
+	
+	@Column(nullable = false, length = 20)
+	private String situacao;
+	
+	@Column(nullable = false, length = 30)
+	private String senha;
 }

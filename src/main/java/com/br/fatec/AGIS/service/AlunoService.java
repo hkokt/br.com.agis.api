@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.br.fatec.AGIS.dto.AlunoDto;
 import com.br.fatec.AGIS.model.Aluno;
 import com.br.fatec.AGIS.model.Curso;
-import com.br.fatec.AGIS.model.Usuario;
 import com.br.fatec.AGIS.repository.AlunoRepository;
 import com.br.fatec.AGIS.repository.CursoRepository;
 
@@ -37,18 +36,16 @@ public class AlunoService {
 
 	public Aluno insert(AlunoDto alunoDto) {
 		var alunoModel = new Aluno();
-		Usuario user = new Usuario();
 		
 		Optional<Curso> curso = cursoRepository.findById(alunoDto.codCurso());
 		
-		user.setCpf(alunoDto.cpf());
-		user.setNome(alunoDto.nome());
-		user.setDataNasc(alunoDto.dataNasc());
-		user.setEmailPessoal(alunoDto.emailPessoal());
-		user.setEmailCorp(geraEmailCorp(alunoDto.nome().trim()));
-		user.setSituacao("ativo");
-		user.setSenha("123456");
-		alunoModel.setUsuario(user);
+		alunoModel.setCpf(alunoDto.cpf());
+		alunoModel.setNome(alunoDto.nome());
+		alunoModel.setDataNasc(alunoDto.dataNasc());
+		alunoModel.setEmailPessoal(alunoDto.emailPessoal());
+		alunoModel.setEmailCorp(geraEmailCorp(alunoDto.nome().trim()));
+		alunoModel.setSituacao("ativo");
+		alunoModel.setSenha("123456");
 		
 		alunoModel.setNomeSocial(alunoDto.nomeSocial());
 		alunoModel.setDataConc2grau(alunoDto.dataConc2grau());
@@ -84,7 +81,7 @@ public class AlunoService {
 		Optional<Aluno> aluno = alunoRepository.findById(ra);
 		
 		var alunoModel = aluno.get();
-		alunoModel.getUsuario().setSituacao("Trancado");
+		alunoModel.setSituacao("Trancado");
 		
 		return alunoRepository.save(alunoModel);
 	}

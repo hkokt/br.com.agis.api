@@ -40,6 +40,9 @@ public class Turma {
 	@Column(nullable = false, length = 20)
 	private String situacao;
 	
+	@Column(length = 50, name = "metodo_avaliativo")
+	private String metodoAvaliativo;
+	
 	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Disciplina.class, fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false, name = "cod_disciplina")
