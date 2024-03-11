@@ -1,16 +1,13 @@
 package com.br.fatec.AGIS.model;
 
+import lombok.Getter;
+
+@Getter
 public enum UserRole {
-    ADMIN("admin"),
-   USER("user");
+
+    ADMIN,
+    USER;
 
     private String role;
 
-    UserRole(String role){
-        this.role=role;
-    }
-
-    public String getRole(){
-        return this.role;
-    }
 }

@@ -24,6 +24,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/datas")
 public class DataController {
+
 	@Autowired
 	private DataService dataService;
 	
