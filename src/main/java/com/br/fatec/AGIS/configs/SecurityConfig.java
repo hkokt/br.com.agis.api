@@ -29,9 +29,26 @@ public class SecurityConfig {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
 						.requestMatchers(HttpMethod.POST, "/secretario/login").permitAll()
-						.requestMatchers(HttpMethod.POST, "/secretario/registro").permitAll()
-						.requestMatchers(HttpMethod.POST, "/curso").hasRole("SECRETARIO")
-						.anyRequest().authenticated()
+						//requisições POST permitidas para a secretaria
+						.requestMatchers(HttpMethod.POST, 
+								"/secretario/registro", 
+								"/alunos", 
+								"/cursos", 
+								"/disciplinas", 
+								"/grades",
+								"/turmas",
+								"/professores",
+								"//datas"
+								).hasRole("SECRETARIO")
+						//requisições PUT permitidas para a secretaria
+						.requestMatchers(HttpMethod.PUT, 
+								"/alunos", 
+								"/cursos", 
+								"/disciplinas", 
+								"/grades",
+								"//datas"
+								).hasRole("SECRETARIO")
+						//.anyRequest().authenticated()
 				)
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
