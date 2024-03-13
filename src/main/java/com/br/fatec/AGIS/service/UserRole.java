@@ -1,4 +1,4 @@
-package security;
+package com.br.fatec.AGIS.service;
 
 import lombok.Getter;
 import lombok.Setter;

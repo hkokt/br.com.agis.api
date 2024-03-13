@@ -1,4 +1,4 @@
-package security;
+package com.br.fatec.AGIS.service;
 
 import java.io.IOException;
 
@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class SecurityFilter extends OncePerRequestFilter {
-
 	@Autowired
     private TokenService tokenService;
 	

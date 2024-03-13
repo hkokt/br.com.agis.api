@@ -15,9 +15,9 @@ import com.br.fatec.AGIS.dto.SecretarioDto;
 import com.br.fatec.AGIS.dto.TokenDto;
 import com.br.fatec.AGIS.model.Secretario;
 import com.br.fatec.AGIS.service.SecretarioService;
+import com.br.fatec.AGIS.service.TokenService;
 
 import jakarta.validation.Valid;
-import security.TokenService;
 
 @RestController
 @RequestMapping("/secretario")

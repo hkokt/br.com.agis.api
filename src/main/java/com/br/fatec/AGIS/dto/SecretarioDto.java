@@ -2,9 +2,10 @@ package com.br.fatec.AGIS.dto;
 
 import java.time.LocalDate;
 
+import com.br.fatec.AGIS.service.UserRole;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import security.UserRole;
 
 public record SecretarioDto(
 		@NotBlank String cpf,

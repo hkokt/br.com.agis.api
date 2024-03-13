@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import security.SecurityFilter;
+import com.br.fatec.AGIS.service.SecurityFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +31,7 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.POST, "/secretario/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "/secretario/registro").permitAll()
 						.requestMatchers(HttpMethod.POST, "/curso").hasRole("SECRETARIO")
-						//.anyRequest().authenticated()
+						.anyRequest().authenticated()
 				)
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();

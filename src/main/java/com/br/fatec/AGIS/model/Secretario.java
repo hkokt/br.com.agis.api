@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.br.fatec.AGIS.service.UserRole;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,13 +20,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
-import security.UserRole;
 
 @lombok.Data
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Secretario implements UserDetails {
+	private static final long serialVersionUID = 1L;
+
 	// PARTE NECESSARIA PARA LOGIN
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
