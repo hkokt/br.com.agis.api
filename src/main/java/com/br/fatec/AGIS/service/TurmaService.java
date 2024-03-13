@@ -16,8 +16,6 @@ import com.br.fatec.AGIS.repository.GradeCurricularRepository;
 import com.br.fatec.AGIS.repository.ProfessorRepository;
 import com.br.fatec.AGIS.repository.TurmaRepository;
 
-import jakarta.validation.Valid;
-
 @Service
 public class TurmaService {
 	@Autowired

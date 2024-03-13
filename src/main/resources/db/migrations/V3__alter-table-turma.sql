@@ -1,1 +1,0 @@
-ALTER TABLE turmas ADD metodo_avaliativo VARCHAR(50)
