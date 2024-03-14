@@ -36,7 +36,9 @@ public class SecretarioController {
 		var userPassowrd = new UsernamePasswordAuthenticationToken(loginDto.cpf(), loginDto.senha());
 		var auth = authenticationManager.authenticate(userPassowrd);
 		
-		var token = tokenService.generateToken((Secretario) auth.getPrincipal());
+		Secretario sec = (Secretario) auth.getPrincipal();
+		
+		var token = tokenService.generateToken(sec.getCpf());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(new TokenDto(token));
 	}

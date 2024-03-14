@@ -11,7 +11,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.br.fatec.AGIS.model.Secretario;
 
 @Service
 public class TokenService {
@@ -19,10 +18,10 @@ public class TokenService {
 	@Value("${api.security.token.secret}")
 	private String secret;
 
-	public String generateToken(Secretario secretario) {
+	public String generateToken(String cpf) {
 		try {
 			Algorithm alg = Algorithm.HMAC256(secret);
-			return JWT.create().withIssuer("secUser").withSubject(secretario.getCpf())
+			return JWT.create().withIssuer("secUser").withSubject(cpf)
 					.withExpiresAt(genExpirationDate()).sign(alg);
 
 		} catch (JWTCreationException jwtCreationException) {

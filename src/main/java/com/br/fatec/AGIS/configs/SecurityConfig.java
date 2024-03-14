@@ -28,27 +28,27 @@ public class SecurityConfig {
 				.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers(HttpMethod.POST, "/secretario/login").permitAll()
-						//requisições POST permitidas para a secretaria
-						.requestMatchers(HttpMethod.POST, 
-								"/secretario/registro", 
-								"/alunos", 
-								"/cursos", 
-								"/disciplinas", 
-								"/grades",
-								"/turmas",
-								"/professores",
-								"//datas"
-								).hasRole("SECRETARIO")
-						//requisições PUT permitidas para a secretaria
-						.requestMatchers(HttpMethod.PUT, 
-								"/alunos", 
-								"/cursos", 
-								"/disciplinas", 
-								"/grades",
-								"//datas"
-								).hasRole("SECRETARIO")
-						//.anyRequest().authenticated()
+//						.requestMatchers(HttpMethod.POST, "/secretario/registro", "/secretario/login").permitAll()
+//						//requisições POST permitidas para a secretaria
+//						.requestMatchers(HttpMethod.POST, 
+//								//"/secretario/registro", 
+//								"/alunos", 
+//								"/cursos", 
+//								"/disciplinas", 
+//								"/grades",
+//								"/turmas",
+//								"/professores",
+//								"//datas"
+//								).hasRole("SECRETARIO")
+//						//requisições PUT permitidas para a secretaria
+//						.requestMatchers(HttpMethod.PUT, 
+//								"/alunos", 
+//								"/cursos", 
+//								"/disciplinas", 
+//								"/grades",
+//								"//datas"
+//								).hasRole("SECRETARIO")
+						.anyRequest().permitAll()
 				)
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
