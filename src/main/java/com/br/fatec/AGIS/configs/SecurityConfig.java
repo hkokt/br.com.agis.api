@@ -28,27 +28,67 @@ public class SecurityConfig {
 				.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
-//						.requestMatchers(HttpMethod.POST, "/secretario/registro", "/secretario/login").permitAll()
-//						//requisições POST permitidas para a secretaria
-//						.requestMatchers(HttpMethod.POST, 
-//								//"/secretario/registro", 
-//								"/alunos", 
-//								"/cursos", 
-//								"/disciplinas", 
-//								"/grades",
-//								"/turmas",
-//								"/professores",
-//								"//datas"
-//								).hasRole("SECRETARIO")
-//						//requisições PUT permitidas para a secretaria
-//						.requestMatchers(HttpMethod.PUT, 
-//								"/alunos", 
-//								"/cursos", 
-//								"/disciplinas", 
-//								"/grades",
-//								"//datas"
-//								).hasRole("SECRETARIO")
-						.anyRequest().permitAll()
+						.requestMatchers(HttpMethod.POST, "/professores/login", "/secretario/registro", "/secretario/login").permitAll()
+						
+						// SECRETARIA
+						.requestMatchers(HttpMethod.POST, 
+								//"/secretario/registro", 
+								"/alunos", 
+								"/cursos", 
+								"/disciplinas", 
+								"/grades",
+								"/turmas",
+								"/professores/registro",
+								"/datas"
+								).hasRole("SECRETARIO")
+						.requestMatchers(HttpMethod.GET, 
+								"/alunos", 
+								"/alunos/{ra}", 
+								"/cursos", 
+								"/cursos/{cod}", 
+								"/datas",
+								"/datas/{desc}",
+								"/disciplinas", 
+								"/disciplinas/{cod}",
+								"/disciplinas/curso/{cod}",
+								"/grades",
+								"/grades/{cod}",
+								"/matriculas/aluno/{ra}",
+								"/professores",
+								"/professores/{cod}",
+								"/turmas/{cod}",
+								"/turmas/grade/{cod}"
+								).hasRole("SECRETARIO")
+						.requestMatchers(HttpMethod.PUT, 
+								"/alunos/{ra}", 
+								"/cursos/{cod}", 
+								"/disciplinas/{cod}", 
+								"/datas/{data}",
+								"/professores/{cod}",
+								"/turmas/{cod}"
+								).hasRole("SECRETARIO")
+						.requestMatchers(HttpMethod.DELETE, 
+								"/alunos/{ra}", 
+								"/cursos/{cod}", 
+								"/disciplinas/{cod}", 
+								"/datas/{data}",
+								"/professores/{cod}",
+								"/turmas/{cod}"
+								).hasRole("SECRETARIO")
+						
+						// PROFESSOR
+						.requestMatchers(HttpMethod.POST, 
+								"/chamada"
+								).hasRole("PROFESSOR")
+						.requestMatchers(HttpMethod.GET, 
+								"/chamada/{cod}/{data}",
+								"/chamada/verificacao/{cod}/{data}",
+								"/matriculas/turma/{cod}",
+								"/turmas/professor/{cod}"
+								).hasRole("PROFESSOR")
+						.requestMatchers(HttpMethod.PATCH, 
+								"/turmas/{cod}/{metodo}"
+								).hasRole("PROFESSOR")
 				)
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();

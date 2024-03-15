@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.br.fatec.AGIS.dto.ProfessorDto;
@@ -19,11 +20,6 @@ public class ProfessorService {
 		return professorRepository.findAll();
 	}
 	
-	// LOGIN
-	public Professor login(String cpf) {
-		return professorRepository.loginProf(cpf);
-	}
-	
 	public Professor selectById(Long id) throws Exception {
 		Optional<Professor> professor = professorRepository.findById(id);
 		if (professor.isEmpty()) {
@@ -34,17 +30,18 @@ public class ProfessorService {
 	}
 	
 	public Professor insert(ProfessorDto professorDto) {
+		String encryptedPasswd = new BCryptPasswordEncoder().encode("123456");
 		var professorModel = new Professor();
 		
 		professorModel.setCpf(professorDto.cpf());
+		professorModel.setSenha(encryptedPasswd);
+		professorModel.setRole(professorDto.role());
+		professorModel.setTitulacao(professorDto.titulacao());
 		professorModel.setNome(professorDto.nome());
 		professorModel.setDataNasc(professorDto.dataNasc());
 		professorModel.setEmailPessoal(professorDto.emailPessoal());
 		professorModel.setEmailCorp(geraEmailCorp(professorDto.nome()));
 		professorModel.setSituacao("ativo");
-		professorModel.setSenha("123456");
-		
-		professorModel.setTitulacao(professorDto.titulacao());
 		
 		return professorRepository.save(professorModel);
 	}
@@ -81,7 +78,7 @@ public class ProfessorService {
 	}
 	
 	private String geraEmailCorp(String nome) {
-		String email = nome;
+		String email = nome.trim();
 		
 		for (int i = 0; i < 4; i++) {
 			email += (int) (Math.random() * 10);

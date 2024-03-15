@@ -1,9 +1,19 @@
 package com.br.fatec.AGIS.model;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.br.fatec.AGIS.service.UserRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +25,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Professor{
+public class Professor implements UserDetails {
+	private static final long serialVersionUID = 1L;
+	
+	// PARTE NECESSARIA PARA LOGIN
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
@@ -24,6 +37,14 @@ public class Professor{
 	@Column(nullable = false, length = 11)
 	private String cpf;
 	
+	@Column(nullable = false, length = 30)
+	private String senha;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, name = "roles")
+	private UserRole role;
+	
+	//DADOS A MANTER
 	@Column(nullable = false, length = 100)
 	private String titulacao;	
 	
@@ -41,7 +62,44 @@ public class Professor{
 	
 	@Column(nullable = false, length = 20)
 	private String situacao;
-	
-	@Column(nullable = false, length = 30)
-	private String senha;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (this.role == UserRole.PROFESSOR) return List.of(new SimpleGrantedAuthority("ROLE_PROFESSOR"));
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return cpf;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

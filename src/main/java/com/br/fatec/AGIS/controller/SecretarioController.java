@@ -16,6 +16,7 @@ import com.br.fatec.AGIS.dto.TokenDto;
 import com.br.fatec.AGIS.model.Secretario;
 import com.br.fatec.AGIS.service.SecretarioService;
 import com.br.fatec.AGIS.service.TokenService;
+import com.br.fatec.AGIS.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -27,6 +28,9 @@ public class SecretarioController {
 	
 	@Autowired
 	private SecretarioService secretarioService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private TokenService tokenService;
@@ -45,7 +49,7 @@ public class SecretarioController {
 	
 	@PostMapping("/registro")
 	public ResponseEntity<Secretario> insert(@RequestBody @Valid SecretarioDto secretarioDto) {
-		if (secretarioService.loadUserByUsername(secretarioDto.cpf()) == null) { 
+		if (userService.loadUserByUsername(secretarioDto.cpf()) == null) { 
 			return ResponseEntity.status(HttpStatus.OK).body(secretarioService.insert(secretarioDto));
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

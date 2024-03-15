@@ -1,9 +1,6 @@
 package com.br.fatec.AGIS.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,30 +9,25 @@ import com.br.fatec.AGIS.model.Secretario;
 import com.br.fatec.AGIS.repository.SecretarioRepository;
 
 @Service
-public class SecretarioService implements UserDetailsService {
+public class SecretarioService  {
 	
 	@Autowired
 	private SecretarioRepository secretarioRepository;
 	
 	public Secretario insert(SecretarioDto secretarioDto) {
 		String encryptedPasswd = new BCryptPasswordEncoder().encode(secretarioDto.senha());
-		var secretario = new Secretario();
+		var secretarioModel = new Secretario();
 		
-		secretario.setCpf(secretarioDto.cpf());
-		secretario.setSenha(encryptedPasswd);
-		secretario.setRole(secretarioDto.role());
-		secretario.setNome(secretarioDto.nome());
-		secretario.setDataNasc(secretarioDto.dataNasc());
-		secretario.setEmailPessoal(secretarioDto.emailPessoal());
-		secretario.setEmailCorp(geraEmailCorp(secretarioDto.nome()));
-		secretario.setSituacao("ativo");
+		secretarioModel.setCpf(secretarioDto.cpf());
+		secretarioModel.setSenha(encryptedPasswd);
+		secretarioModel.setRole(secretarioDto.role());
+		secretarioModel.setNome(secretarioDto.nome());
+		secretarioModel.setDataNasc(secretarioDto.dataNasc());
+		secretarioModel.setEmailPessoal(secretarioDto.emailPessoal());
+		secretarioModel.setEmailCorp(geraEmailCorp(secretarioDto.nome()));
+		secretarioModel.setSituacao("ativo");
 		
-		return secretarioRepository.save(secretario);
-	}
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return secretarioRepository.findByCpf(username);
+		return secretarioRepository.save(secretarioModel);
 	}
 	
 	private String geraEmailCorp(String nome) {

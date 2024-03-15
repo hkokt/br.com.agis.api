@@ -33,7 +33,7 @@ CREATE TABLE Professor (
     email_pessoal  VARCHAR(30) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     situacao VARCHAR(20) NOT NULL,
-    senha VARCHAR(30) NOT NULL,
+    senha TEXT NOT NULL,
     UNIQUE(email_corp, email_pessoal)
 );
 
@@ -53,7 +53,7 @@ CREATE TABLE Aluno (
     email_pessoal  VARCHAR(30) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     situacao VARCHAR(20) NOT NULL,
-    senha VARCHAR(30) NOT NULL,
+    senha TEXT NOT NULL,
     CONSTRAINT fk_curso_aluno FOREIGN KEY (cod_curso) REFERENCES Curso(cod),
     UNIQUE(cpf, email_corp, email_pessoal)
 );
